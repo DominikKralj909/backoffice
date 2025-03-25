@@ -40,7 +40,6 @@ const Login = () => {
 						<input
 							type="text"
 							id="username"
-							className="form-input-text"
 							value={loginData.username}
 							onChange={handleUsernameChange}
 							required
@@ -54,7 +53,6 @@ const Login = () => {
 						<input
 							type="password"
 							id="password"
-							className="form-input-text"
 							value={loginData.password}
 							onChange={handlePasswordChange}
 							required
@@ -67,7 +65,6 @@ const Login = () => {
 							id="remember"
 							checked={loginData.rememberMe}
 							onChange={handleRememberMeChange}
-							className="form-input-checkbox"
 						/>
 						<label
 							htmlFor="remember"
@@ -76,11 +73,7 @@ const Login = () => {
 							Zapamti me
 						</label>
 					</div>
-					<input
-						type="submit"
-						className="w-full py-3 bg-softlab text-white font-semibold rounded-md hover:bg-softlab/90 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-softlab focus:ring-opacity-50 focus-visible:ring-2 focus-visible:ring-softlab focus-visible:ring-opacity-75 mt-auto"
-						value="Prijava"
-					/>
+					<input type="submit" value="Prijava" />
 				</form>
 			</div>
 		</div>
