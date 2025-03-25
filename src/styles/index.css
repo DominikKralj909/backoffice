@@ -4,6 +4,7 @@
 @theme {
 	--color-softlab: #c2cc2b;
 	--color-softlab-focus: #d3e07d;
+	--color-softlab-teal: #94c9ed;
 }
 
 @layer base {

@@ -1,6 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Logo from '../public/logo.svg';
+
 const Login = () => {
 	const navigate = useNavigate();
 
@@ -13,7 +15,7 @@ const Login = () => {
 	const handleLogin = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		navigate('/dashboard');
+		navigate('/dashboard', { state: { username: loginData.username } });
 	};
 
 	const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,9 +31,10 @@ const Login = () => {
 	};
 
 	return (
-		<div className="flex justify-center items-center h-screen bg-softlabGreen">
+		<div className="flex flex-col justify-center items-center h-screen bg-softlabGreen gap-y-32">
+			<img src={Logo} alt="Softlab Logo" className="w-48 h-12 mb-3" />
 			<div className="w-full max-w-2xl p-16 bg-white rounded-lg shadow-2xl">
-				<h2 className="text-4xl font-bold mb-16 text-center">Login</h2>
+				<h2 className="text-4xl font-medium mb-16 text-center">Login</h2>
 				<form onSubmit={handleLogin} className="space-y-4">
 					<div>
 						<label htmlFor="username" className="sr-only">
