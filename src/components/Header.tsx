@@ -1,15 +1,21 @@
 import { useState } from 'react';
 
 import Modal from './Modal';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
 	username: string;
 }
 
 const Header = ({ username }: HeaderProps) => {
+	const navigate = useNavigate();
+
 	const [visible, setVisible] = useState(false);
 
 	const toggleModal = () => setVisible((prevVisible) => !prevVisible);
+	const handleLogout = () => {
+		navigate('/');
+	};
 
 	return (
 		<>
@@ -18,9 +24,9 @@ const Header = ({ username }: HeaderProps) => {
 					<div className="text-xl font-medium">{`Dobrodošli: ${username}`}</div>
 					<button
 						className="bg-softlab-teal hover:bg-softlab-teal/90 text-white px-4 py-2 rounded-md cursor-pointer"
-						onClick={toggleModal}
+						onClick={handleLogout}
 					>
-						Open Modal
+						Odjava
 					</button>
 				</div>
 			</header>

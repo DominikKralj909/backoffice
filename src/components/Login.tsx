@@ -1,6 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { loginUser } from '../services/api';
+
 import Logo from '../public/logo.svg';
 
 const Login = () => {
@@ -11,11 +13,25 @@ const Login = () => {
 		password: '',
 		rememberMe: false,
 	});
+	const [errorMessage, setErrorMessage] = useState('');
 
-	const handleLogin = (event: FormEvent<HTMLFormElement>) => {
+	const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		navigate('/dashboard', { state: { username: loginData.username } });
+		try {
+			const { username, password } = loginData;
+
+			const response = await loginUser({ username, password });
+
+			if (response.success) {
+				navigate('/dashboard', { state: { username: loginData.username } });
+			} else {
+				setErrorMessage('Pogrešno korisničko ime ili lozinka.');
+			}
+		} catch (error) {
+			setErrorMessage('Došlo je do greške, pokušajte kasnije.');
+			console.error(error);
+		}
 	};
 
 	const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +51,11 @@ const Login = () => {
 			<img src={Logo} alt="Softlab Logo" className="w-48 h-12 mb-3" />
 			<div className="w-full max-w-2xl p-16 bg-white rounded-lg shadow-2xl">
 				<h2 className="text-4xl font-medium mb-16 text-center">Login</h2>
+				{errorMessage && (
+					<div className="mb-4 p-3 text-red-700 bg-red-100 border border-red-400 rounded">
+						{errorMessage}
+					</div>
+				)}
 				<form onSubmit={handleLogin} className="space-y-4">
 					<div>
 						<label htmlFor="username" className="sr-only">
